@@ -15,4 +15,3 @@
     </div>
 </div>
 <?= mz_get_single_post_syntax_script() ?>
-<?= mz_get_single_post_audiojs_script() ?>
