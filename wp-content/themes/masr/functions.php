@@ -1,6 +1,6 @@
 <?php
-//define('MZ_LANGUAGE', 'zh-cn');
-define('MZ_LANGUAGE', 'en-us');
+define('MZ_LANGUAGE', 'zh-cn');
+//define('MZ_LANGUAGE', 'en-us');
 define('MZ_404_REFRESH_TIME', 5);
 define('MZ_GALLERY_PIC_COUNT', 6);
 define('MZ_PAGINATION_SHOW', 6);
