@@ -20,7 +20,6 @@ function merge_style($dir, $arr, $output)
 $theme_home = dirname(dirname(__FILE__));
 merge_style($theme_home . '/css/'
     , array('reset', 'global', 'layout', 'post', 'comment', 'sidebar', 'page', 'plugins'), 'mazr');
-$plugin_home = dirname(dirname($theme_home)) . '/plugins';
-merge_style($plugin_home . '/syntaxhighlighter2/styles/', array('shCore', 'shThemeEmacs', 'shAsmStyle'), 'syntaxhighlighter');
+merge_style($theme_home . '/syntaxhighlighter2/styles/', array('shCore', 'shThemeEmacs', 'shAsmStyle'), 'syntaxhighlighter');
 
 ?>

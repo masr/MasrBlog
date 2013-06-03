@@ -14,9 +14,10 @@ body {
 }
 
 #header a.description {
+    font-family: 'Trebuchet MS', Tahoma, Verdana, Arial, sans-serif;
     color: #000;
     font-weight: bold;
-    font-size: 1.8em;
+    font-size: 1.6em;
     height: 170px;
     width: 1000px;
     margin: 0 auto;
@@ -32,10 +33,8 @@ body {
 
 #header a.description:first-letter {
     font-weight: bolder;
-    font-size: 2em;
+    font-size: 1.8em;
     font-style: italic;
-    letter-spacing: 5px;
-    color: #fff;
 }
 
 #header_wrap h1 {
@@ -44,8 +43,10 @@ body {
 
 /** Navigation **/
 #navigation {
-    width: 850px;
-    margin: 15px 0 15px 200px;;
+    width: 950px;
+    margin: 15px auto;
+    position: relative;
+    left: -100px;
 }
 
 #navigation li {
@@ -55,8 +56,8 @@ body {
 
 #navigation li a {
     color: #eee;
-    width: 120px;
-    height: 40px;
+    min-width: 120px;
+    min-height: 40px;
     display: block;
     line-height: 40px;
     text-align: center;

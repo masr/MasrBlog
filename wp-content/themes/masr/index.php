@@ -1,9 +1,10 @@
 <? get_header(); ?>
 <? if (MZ_IS_HOME_PAGE): ?>
-<div id="gallery"></div>
+
 <? $posts = array(); ?>
 <? query_posts('meta_key=featured&showposts=' . MZ_GALLERY_PIC_COUNT . '&category_name=poem,life,geek,music'); ?>
 <? if (have_posts()) : ?>
+    <div id="gallery"></div>
     <? while (have_posts()) : the_post(); ?>
         <? $posts[] = mz_get_gallery_single_obj($post) ?>
         <? endwhile; ?>
@@ -24,7 +25,7 @@
         <? endwhile; ?>
 
     <div class="par_page_navi"><?
-        mz_par_pagenavi(6); ?></div>
+        mz_par_pagenavi(MZ_PAGINATION_SHOW); ?></div>
 </div>
 <? get_sidebar(); ?>
 <? get_footer(); ?>

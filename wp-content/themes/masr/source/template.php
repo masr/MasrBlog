@@ -1,6 +1,6 @@
 <?php
 
-function mz_par_pagenavi($range = 9)
+function mz_par_pagenavi($range = MZ_PAGINATION_SHOW)
 {
 
     function mz_add_url_param($url, $name, $value)
@@ -32,7 +32,7 @@ function mz_par_pagenavi($range = 9)
             $paged = 1;
         }
         if ($paged != 1) {
-            echo "<a href='" . mz_get_my_pagenum_link(1) . "' class='extend' title='跳转到首页'> 返回首页 </a>";
+            echo "<a href='" . mz_get_my_pagenum_link(1) . "' class='extend' title='" . mz_e('return_to_home_page') . "'> " . mz_e('return_to_home_page') . " </a>";
         }
         if ($max_page > $range) {
             if ($paged < $range) {
@@ -62,17 +62,18 @@ function mz_par_pagenavi($range = 9)
             }
         }
         if ($paged != $max_page) {
-            echo "<a href='" . mz_get_my_pagenum_link($max_page) . "' class='extend' title='跳转到最后一页'> 最后一页 </a>";
+            echo "<a href='" . mz_get_my_pagenum_link($max_page) . "' class='extend' title='" . mz_e('return_to_last_page') . "'> " . mz_e('return_to_last_page') . " </a>";
         }
     }
 }
 
 function mz_get_cached_avatar($email, $size)
 {
+
     global $wpdb;
-    $default_url = MZ_HOME . "/wp-content/plugins/fv-gravatar-cache/images/default.png";
+//    $default_url = MZ_THEME_HOME . "/fv-gravatar-cache/images/default.png";
     if (empty($size))
-        $size = 48;
+        $size = MZ_ARTICLE_COMMENT_GRAVATAR_SIZE;
 
     $result = $wpdb->get_results("select * from wp_gravatars where email='$email'");
     if ($result && !empty($result[0]->url)) {
@@ -80,7 +81,7 @@ function mz_get_cached_avatar($email, $size)
         $url = $result->url;
         return "<img src='$url' alt='' width='$size'/>";
     } else {
-        return "<img src='$default_url' alt='' width='$size'/>";
+        return get_avatar($email, $size);
     }
 }
 
@@ -197,14 +198,13 @@ function mz_jquery_script()
 EOF;
 }
 
-function mz_get_category_link_block($slug)
+function mz_get_category_link_block($id)
 {
-    $cat = get_category_by_slug($slug);
-    $name = $cat->name;
-    $id = $cat->term_id;
+    $name = get_the_category_by_ID($id);
     $cat_link = get_category_link($id);
+    $title = mz_e('see_all_articles_of_category', $name);
     return <<<EOF
-   <li class="item"><a title="查看 $name 下的所有文章" href="$cat_link">$name</a></li>
+   <li class="item"><a title="$title" href="$cat_link">$name</a></li>
 
 EOF;
 
@@ -220,7 +220,7 @@ function mz_get_gallery_single_obj($post)
 
 function mz_get_gallery_slider_block($gallery, $posts)
 {
-    $opt = json_encode(array('objs' => $posts, 'width' => 528, 'height' => 285, 'count' => 6));
+    $opt = json_encode(array('objs' => $posts, 'width' => 528, 'height' => 285, 'count' => MZ_GALLERY_PIC_COUNT));
     $home = MZ_THEME_HOME;
     return <<<EOF
         <script type="text/javascript" src="$home/js/gallery.js"></script>
@@ -312,7 +312,7 @@ EOF;
 
 function mz_get_index_post_tags_block()
 {
-    $tags = get_the_tag_list('标签：', ' , ', '');
+    $tags = get_the_tag_list(mz_e('tag') . '：', ' , ', '');
     return <<<EOF
     <div class="post_tags">$tags</div>
 
@@ -323,7 +323,7 @@ EOF;
 function mz_get_index_post_comment_num_block()
 {
     $comments_num = mz_fetch_echo(function () {
-        comments_number('尚无评论', '一个评论', '% 个评论');
+        comments_number(mz_e('no_comment'), mz_e('one_comment'), mz_e('%_comments'));
     });
     return <<<EOF
           <span class="comment_number"> $comments_num </span>
@@ -335,8 +335,10 @@ EOF;
 function mz_get_index_post_edit_link_block()
 {
     $url = get_edit_post_link();
+    $edit_article = mz_e('edit_article');
+    $edit = mz_e('edit');
     return <<<EOF
-   <a class="post_edit_link" href="$url" title="编辑文章">编辑</a>
+   <a class="post_edit_link" href="$url" title="$edit_article">$edit</a>
 
 EOF;
 
@@ -471,7 +473,7 @@ EOF;
 function mz_get_single_post_comment_list()
 {
     $list = mz_fetch_echo(function () {
-        wp_list_comments(array('avatar_size' => '48', 'type' => 'comment'));
+        wp_list_comments(array('avatar_size' => '' . MZ_ARTICLE_COMMENT_GRAVATAR_SIZE, 'type' => 'comment'));
     });
     return <<<EOF
      <ul class="commentlist">
@@ -502,10 +504,10 @@ EOF;
 
 function mz_get_cnzz_analysis()
 {
-    return <<<EOF
- <script src="http://s96.cnzz.com/stat.php?id=4908741&web_id=4908741&show=pic1" language="JavaScript"></script>
-
-EOF;
+//    return <<<EOF
+// <script src="http://s96.cnzz.com/stat.php?id=4908741&web_id=4908741&show=pic1" language="JavaScript"></script>
+//
+//EOF;
 }
 
 function mz_meta_description()

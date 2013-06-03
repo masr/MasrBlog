@@ -23,10 +23,10 @@ function mz_fetch_echo($callback)
 }
 
 
-function mz_get_recent_visitor_comments($count = 5)
+function mz_get_recent_visitor_comments($count = MZ_SIDEBAR_RECENT_COMMENTS)
 {
     global $wpdb;
-    $query = "SELECT * from $wpdb->comments WHERE comment_approved= '1' and user_id not in (1,2) ORDER BY comment_date DESC LIMIT 0 ,$count"; //更改这里的数字改变调用条数
+    $query = "SELECT * from $wpdb->comments WHERE comment_approved= '1' and user_id not in (1,2) ORDER BY comment_date DESC LIMIT 0 ,$count";
     return $wpdb->get_results($query);
 }
 

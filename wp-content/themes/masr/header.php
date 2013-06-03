@@ -22,17 +22,17 @@
         <h1><a href="<?= MZ_HOME ?>"><?=MZ_BLOG_NAME?></a></h1>
 
         <div id="header">
-            <a href="<?= MZ_HOME ?>" class="description"><?= MZ_BLOG_SUB_TITLE ?></a>
+            <h1><?= MZ_BLOG_NAME ?></h1><a href="<?= MZ_HOME ?>" class="description"><?= MZ_BLOG_SUB_TITLE ?></a>
         </div>
     </div>
     <div id="navigation">
         <ul class="fix_height">
-            <?= mz_get_category_link_block('geek')?>
-            <?= mz_get_category_link_block('life')?>
-            <?= mz_get_category_link_block('music')?>
-            <?= mz_get_category_link_block('poem')?>
-            <?= mz_get_category_link_block('other')?>
-            <li class="item message"><a href="<?= MZ_HOME ?>/messages">留言板</a></li>
+            <? $ids = get_all_category_ids();
+            foreach ($ids as $id): ?>
+                <?= mz_get_category_link_block($id) ?>
+                <? endforeach ?>
+
+            <li class="item message"><a href="<?= MZ_HOME ?>/messages"><?=mz_e('message_board')?></a></li>
         </ul>
     </div>
     <div id="container" class="fix_height">

@@ -21,8 +21,8 @@ function merge_script($dir, $arr, $output)
 merge_script(dirname(dirname(__FILE__)) . '/js/'
     , array('jquery-easing-1.3.pack', 'jquery-easing-compatibility.1.2.pack', 'coda-slider.1.1.1.pack', 'gallery_slider')
     , 'gallery');
-merge_script(dirname(dirname(dirname(dirname(__FILE__)))) . '/plugins/syntaxhighlighter2/scripts/'
+merge_script(dirname(dirname(__FILE__)) . '/syntaxhighlighter2/scripts/'
     , array('shBrushBash', 'shBrushCss', 'shBrushJava', 'shBrushJScript', 'shBrushPhp', 'shBrushPlain'
-    , 'shBrushPython', 'shBrushRuby', 'shBrushSql', 'shBrushVimrc', 'shBrushXml', 'shBrushCpp', 'shBrushAsm','shBrushCoffee'), 'shBrushAll');
+    , 'shBrushPython', 'shBrushRuby', 'shBrushSql', 'shBrushVimrc', 'shBrushXml', 'shBrushCpp', 'shBrushAsm', 'shBrushCoffee'), 'shBrushAll');
 
 ?>
